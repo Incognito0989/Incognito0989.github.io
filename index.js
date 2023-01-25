@@ -1,3 +1,5 @@
+//import flatplat from './assets/flat-volume.png'
+
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
 
