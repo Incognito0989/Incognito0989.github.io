@@ -13,7 +13,8 @@ const bound = {
 }
 const flatVolume = 'https://lh6.googleusercontent.com/5nZkfUzdXBcDuVBWLkYrv6IP2IVoFfKSWB1O-J5Pos1YSqbOT265EtzkkxgTljrcgWs=w2400'
 const floor = 'https://www.3dxo.com/images/textures/s/arroway.de_concrete19_d100.png'
-const wall = 'https://lh6.googleusercontent.com/rYJVgxK9pNiNYFqm3mST0nevMkk22dh1ILPkdB5vg_yFGyiw3ADbSHFmmdEx--U7E4Q=w2400'
+//const wall = 'https://lh6.googleusercontent.com/rYJVgxK9pNiNYFqm3mST0nevMkk22dh1ILPkdB5vg_yFGyiw3ADbSHFmmdEx--U7E4Q=w2400'
+const wall = 'https://blockids.eu/data/products/9e/indoor-bk8-01.jpg'
 
 class Player {
     constructor() {
@@ -23,11 +24,11 @@ class Player {
             right: .7,
             left: .4
         }
-        this.jump = .01 * canvas.height
+        this.jump = .007 * canvas.height
         this.speed = 3
         this.position = {
             x: 100,
-            y: canvas.height - this.height
+            y: canvas.height * .8 - this.height
         }
         this.velocity = {
             x: 0,
@@ -173,9 +174,17 @@ class Rectangle extends Platform {
 
 const player = new Player()
 const platforms = [
-    new Rectangle({x: canvas.width * .24, y: canvas.height * .38, width: 100}),
+    new Rectangle({x: canvas.width * .24, y: canvas.height * .1, width: 100}),
+    new Rectangle({x: canvas.width * .24, y: canvas.height * .2, width: 100}),
+    new Rectangle({x: canvas.width * .24, y: canvas.height * .3, width: 100}),
+    new Rectangle({x: canvas.width * .24, y: canvas.height * .4, width: 100}),
     new Rectangle({x: canvas.width * .24, y: canvas.height * .5, width: 100}),
-    new Rectangle({x: canvas.width * .24, y: canvas.height * .7, width: 100})
+    new Rectangle({x: canvas.width * .24, y: canvas.height * .6, width: 100}),
+    new Rectangle({x: canvas.width * .24, y: canvas.height * .7, width: 100}),
+    new Rectangle({x: canvas.width * .24, y: canvas.height * .8, width: 100}),
+    new Rectangle({x: canvas.width * .24, y: 0, width: 100}),
+    
+    new Rectangle({x: 0, y: canvas.height * .87, width: canvas.width}),
     // new Rectangle({x: -500, y: canvas.height - 100, width: 20000, height: 200, src: floor, offset: [0, .2]}),
     // new Rectangle({x: 100, y: 500, width: 200, height: 200, src: flatVolume, offset: [.1, .2]}),
     // new Rectangle({x: 200, y: 200, width: 400, height: 100, src: flatVolume, offset: [.1, .2]})
@@ -217,24 +226,6 @@ function animate() {
         player.velocity.x = -player.speed
     } else {
         player.velocity.x = 0
-    }
-
-    if (player.position.y < bound.top) {
-        scrollOffset = -player.velocity.y * .3
-        platforms.forEach((platform) => {
-            platform.position.y += scrollOffset
-        })
-        genericObjects.forEach((obj) => {
-            obj.position.y += scrollOffset
-        })
-    } else if(genericObjects[0].position.y > 0 && player.position.y + player.height >= bound.bot && player.velocity.y != 0) {
-        scrollOffset = -player.velocity.y
-        platforms.forEach((platform) => {
-            platform.position.y += scrollOffset
-        })
-        genericObjects.forEach((obj) => {
-            obj.position.y += scrollOffset
-        })
     }
 
     platforms.forEach((platform) => {
