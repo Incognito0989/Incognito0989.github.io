@@ -6,6 +6,8 @@ canvas.height = window.innerHeight
 
 const gravity = 0.5
 const bound = {
+    bot: canvas.height * .8,
+    top: canvas.height * .2,
     upper: canvas.width,
     lower: 0
 }
@@ -15,6 +17,8 @@ const wall = 'https://lh6.googleusercontent.com/rYJVgxK9pNiNYFqm3mST0nevMkk22dh1
 
 class Player {
     constructor() {
+        this.width = 150
+        this.height = 150
         this.offset = {
             right: .7,
             left: .4
@@ -23,14 +27,12 @@ class Player {
         this.speed = 3
         this.position = {
             x: 100,
-            y: 100
+            y: canvas.height - this.height
         }
         this.velocity = {
             x: 0,
             y: 1
         }
-        this.width = 150
-        this.height = 150
 
         this.idleRight = [
             createImage('https://lh6.googleusercontent.com/hMjRHJ9yDt2PtmFeepDxxOroI1yMhTNiG2NBNzRU1ADfO73V2W6qRtYXEjBYTyFqNvI=w2400'),
@@ -90,7 +92,7 @@ class Player {
     }
 
     draw() {
-        console.log(bound.upper + " : " + this.position.x)
+        console.log(bound.bot + " : " + (this.position.y + this.height))
         if(this.velocity.y < 0 || this.velocity.y > 0)
             c.drawImage(this.up[Math.floor(this.frames) % 10], this.position.x, this.position.y, this.width, this.height)
         else if(this.velocity.y == 0 && (this.velocity.x > 0 || scrollOffset > 0))
@@ -176,7 +178,9 @@ const platforms = [
     // new Rectangle({x: 200, y: 200, width: 400, height: 100, src: flatVolume, offset: [.1, .2]})
 ]
 const genericObjects = [
-    new GenericObject({x: 0, y: 0})
+    new GenericObject({x: 0, y: 0}),
+    new GenericObject({x: 0, y: -canvas.height}),
+    new GenericObject({x: 0, y: -canvas.height * 2})
 ]
 
 const keys = {
@@ -214,6 +218,25 @@ function animate() {
     } else {
         player.velocity.x = 0
     }
+
+    if (player.position.y < bound.top) {
+        scrollOffset = player.speed
+        platforms.forEach((platform) => {
+            platform.position.y += scrollOffset
+        })
+        genericObjects.forEach((obj) => {
+            obj.position.y += scrollOffset
+        })
+    } else if(genericObjects[0].position.y > 0 && player.position.y + player.height >= bound.bot) {
+        scrollOffset = -player.velocity.y
+        platforms.forEach((platform) => {
+            platform.position.y += scrollOffset
+        })
+        genericObjects.forEach((obj) => {
+            obj.position.y += scrollOffset
+        })
+    }
+
     platforms.forEach((platform) => {
         if (platform.collision(player)) {
             player.velocity.y = 0
