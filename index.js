@@ -4,7 +4,7 @@ const c = canvas.getContext('2d')
 canvas.width = window.innerWidth
 canvas.height = window.innerHeight
 
-const gravity = 0.5
+const gravity = 0.2
 const bound = {
     bot: canvas.height * .8,
     top: canvas.height * .2,
@@ -23,7 +23,7 @@ class Player {
             right: .7,
             left: .4
         }
-        this.jump = .02 * canvas.height
+        this.jump = .01 * canvas.height
         this.speed = 3
         this.position = {
             x: 100,
@@ -92,7 +92,7 @@ class Player {
     }
 
     draw() {
-        console.log(bound.bot + " : " + (this.position.y + this.height))
+        console.log(this.velocity.y + " : " + (this.position.y + this.height))
         if(this.velocity.y < 0 || this.velocity.y > 0)
             c.drawImage(this.up[Math.floor(this.frames) % 10], this.position.x, this.position.y, this.width, this.height)
         else if(this.velocity.y == 0 && (this.velocity.x > 0 || scrollOffset > 0))
@@ -121,13 +121,14 @@ function createImage(src) {
 }
 
 class GenericObject {
-    constructor({x, y}) {
+    constructor({x, y, src}) {
         this.position = {
             x: x,
             y: y
         }
+        //this.img = createImage('https://static.vecteezy.com/system/resources/thumbnails/000/130/565/small/free-climbing-wall-vector.png')
         //this.img = createImage('https://lh4.googleusercontent.com/prw19UGuul909ffRZVSvo2kqKiXkI06o-VGCeY0ei2Jqx1Ejp6CUSJMhkuNgrTzaaN0=w2400')
-        this.img = createImage(wall)
+        this.img = createImage(src)
     }
 
     draw() {
@@ -172,15 +173,17 @@ class Rectangle extends Platform {
 
 const player = new Player()
 const platforms = [
-    new Rectangle({x: canvas.width * .24, y: canvas.height * .38, width: 100})
+    new Rectangle({x: canvas.width * .24, y: canvas.height * .38, width: 100}),
+    new Rectangle({x: canvas.width * .24, y: canvas.height * .5, width: 100}),
+    new Rectangle({x: canvas.width * .24, y: canvas.height * .7, width: 100})
     // new Rectangle({x: -500, y: canvas.height - 100, width: 20000, height: 200, src: floor, offset: [0, .2]}),
     // new Rectangle({x: 100, y: 500, width: 200, height: 200, src: flatVolume, offset: [.1, .2]}),
     // new Rectangle({x: 200, y: 200, width: 400, height: 100, src: flatVolume, offset: [.1, .2]})
 ]
 const genericObjects = [
-    new GenericObject({x: 0, y: 0}),
-    new GenericObject({x: 0, y: -canvas.height}),
-    new GenericObject({x: 0, y: -canvas.height * 2})
+    new GenericObject({x: 0, y: 0, src: wall}),
+    new GenericObject({x: 0, y: -canvas.height, src: 'https://garden.spoonflower.com/c/11788370/p/f/l/To04PszQ2eJ69qf_6xj9saNtBI63EApS9D7kjgDo1tKmtTcMR1RptR0/Light%20Blue%20Solid%20coordinate%20-%20baby%20blue%2C%20sky%20blue%2C%20pastel%20blue%20.jpg'}),
+
 ]
 
 const keys = {
@@ -196,9 +199,6 @@ let scrollOffset = 0;
 
 function animate() {
     requestAnimationFrame(animate)
-    c.fillStyle = 'white'
-    c.fillRect(0,  0, canvas.width, canvas.height)
-    
     c.clearRect(0, 0, canvas.width, canvas.height)
 
     genericObjects.forEach((genericObject) => {
@@ -220,14 +220,14 @@ function animate() {
     }
 
     if (player.position.y < bound.top) {
-        scrollOffset = player.speed
+        scrollOffset = -player.velocity.y * .3
         platforms.forEach((platform) => {
             platform.position.y += scrollOffset
         })
         genericObjects.forEach((obj) => {
             obj.position.y += scrollOffset
         })
-    } else if(genericObjects[0].position.y > 0 && player.position.y + player.height >= bound.bot) {
+    } else if(genericObjects[0].position.y > 0 && player.position.y + player.height >= bound.bot && player.velocity.y != 0) {
         scrollOffset = -player.velocity.y
         platforms.forEach((platform) => {
             platform.position.y += scrollOffset
@@ -262,7 +262,8 @@ window.addEventListener('keydown', ({keyCode}) => {
             break
         case 87:
             //up
-            player.velocity.y -= player.jump
+            if(player.velocity.y <= 0.5 && player.velocity.y >= -.5)
+                player.velocity.y -= player.jump
             break
     }
 })
