@@ -14,7 +14,7 @@ const bound = {
 const flatVolume = 'https://lh6.googleusercontent.com/5nZkfUzdXBcDuVBWLkYrv6IP2IVoFfKSWB1O-J5Pos1YSqbOT265EtzkkxgTljrcgWs=w2400'
 const floor = 'https://www.3dxo.com/images/textures/s/arroway.de_concrete19_d100.png'
 //const wall = 'https://lh6.googleusercontent.com/rYJVgxK9pNiNYFqm3mST0nevMkk22dh1ILPkdB5vg_yFGyiw3ADbSHFmmdEx--U7E4Q=w2400'
-const wall = 'https://blockids.eu/data/products/9e/indoor-bk8-01.jpg'
+const wall = 'https://lh4.googleusercontent.com/Psgqev3vGD8a1wla_TcNoOsq2Jtpsb4dpCAv2fwirIO4-X0IV37Wq58lqbvoA-gS9fk=w2400'
 
 class Player {
     constructor() {
