@@ -4,7 +4,7 @@ const c = canvas.getContext('2d')
 canvas.width = window.innerWidth
 canvas.height = window.innerHeight
 
-const gravity = 0.2
+const gravity = 0.0002 * canvas.height
 const bound = {
     bot: canvas.height * .8,
     top: canvas.height * .2,
@@ -167,22 +167,45 @@ class Rectangle extends Platform {
     }
 
     draw() {
-        c.fillStyle = 'red'
+        c.fillStyle = "rgba(255, 255, 255, 0)"
         c.fillRect(this.position.x, this.position.y, this.width, this.height)
     }
 }
 
 const player = new Player()
 const platforms = [
-    new Rectangle({x: canvas.width * .24, y: canvas.height * .1, width: 100}),
-    new Rectangle({x: canvas.width * .24, y: canvas.height * .2, width: 100}),
-    new Rectangle({x: canvas.width * .24, y: canvas.height * .3, width: 100}),
-    new Rectangle({x: canvas.width * .24, y: canvas.height * .4, width: 100}),
-    new Rectangle({x: canvas.width * .24, y: canvas.height * .5, width: 100}),
-    new Rectangle({x: canvas.width * .24, y: canvas.height * .6, width: 100}),
-    new Rectangle({x: canvas.width * .24, y: canvas.height * .7, width: 100}),
-    new Rectangle({x: canvas.width * .24, y: canvas.height * .8, width: 100}),
-    new Rectangle({x: canvas.width * .24, y: 0, width: 100}),
+    new Rectangle({x: canvas.width * .238, y: canvas.height * .775, width: canvas.width * .014}),
+    new Rectangle({x: canvas.width * .286, y: canvas.height * .7, width: canvas.width * .01}),
+    new Rectangle({x: canvas.width * .376, y: canvas.height * .7, width: canvas.width * .015}),
+    new Rectangle({x: canvas.width * .42, y: canvas.height * .627, width: canvas.width * .02}),
+    new Rectangle({x: canvas.width * .376, y: canvas.height * .55, width: canvas.width * .015}),
+    new Rectangle({x: canvas.width * .376, y: canvas.height * .468, width: canvas.width * .015}),
+    new Rectangle({x: canvas.width * .32, y: canvas.height * .472, width: canvas.width * .01}),
+    new Rectangle({x: canvas.width * .33, y: canvas.height * .47, width: canvas.width * .01}),
+    new Rectangle({x: canvas.width * .34, y: canvas.height * .468, width: canvas.width * .01}),
+    new Rectangle({x: canvas.width * .283, y: canvas.height * .4, width: canvas.width * .016}),
+    new Rectangle({x: canvas.width * .33, y: canvas.height * .31, width: canvas.width * .005}),
+    new Rectangle({x: canvas.width * .335, y: canvas.height * .313, width: canvas.width * .005}),
+    new Rectangle({x: canvas.width * .34, y: canvas.height * .316, width: canvas.width * .005}),
+    new Rectangle({x: canvas.width * .344, y: canvas.height * .32, width: canvas.width * .005}),
+    new Rectangle({x: canvas.width * .347, y: canvas.height * .323, width: canvas.width * .005}),
+    new Rectangle({x: canvas.width * .422, y: canvas.height * .246, width: canvas.width * .018}),
+    new Rectangle({x: canvas.width * .426, y: canvas.height * .242, width: canvas.width * .01}),
+    new Rectangle({x: canvas.width * .463, y: canvas.height * .33, width: canvas.width * .018}),
+    new Rectangle({x: canvas.width * .466, y: canvas.height * .326, width: canvas.width * .018}),
+    new Rectangle({x: canvas.width * .47, y: canvas.height * .323, width: canvas.width * .015}),
+    new Rectangle({x: canvas.width * .475, y: canvas.height * .32, width: canvas.width * .01}),
+    new Rectangle({x: canvas.width * .48, y: canvas.height * .316, width: canvas.width * .01}),
+    new Rectangle({x: canvas.width * .51, y: canvas.height * .394, width: canvas.width * .025}),
+    new Rectangle({x: canvas.width * .61, y: canvas.height * .394, width: canvas.width * .014}),
+    new Rectangle({x: canvas.width * .65, y: canvas.height * .325, width: canvas.width * .02}),
+    new Rectangle({x: canvas.width * .667, y: canvas.height * .321, width: canvas.width * .005}),
+    new Rectangle({x: canvas.width * .7, y: canvas.height * .245, width: canvas.width * .018}),
+    new Rectangle({x: canvas.width * .753, y: canvas.height * .165, width: canvas.width * .01}),
+    new Rectangle({x: canvas.width * .7, y: canvas.height * .1, width: canvas.width * .02}),
+    new Rectangle({x: canvas.width * .7, y: canvas.height * .11, width: canvas.width * .029}),
+    
+
     
     new Rectangle({x: 0, y: canvas.height * .87, width: canvas.width}),
     // new Rectangle({x: -500, y: canvas.height - 100, width: 20000, height: 200, src: floor, offset: [0, .2]}),
