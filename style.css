@@ -47,6 +47,11 @@ canvas {
     border-bottom-left-radius: 1rem;
 }
 
+.hidden {
+    visibility: hidden;
+    pointer-events: none;
+}
+
 .envelope {
     position: relative;
     width: 40rem;
@@ -111,6 +116,15 @@ canvas {
 .final {
     z-index: 20;
     transform: translateY(0rem) scale(2);
+}
+
+.fade-in {
+    animation: fadeIn 5s;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
 }
 
 @keyframes pullLetter {

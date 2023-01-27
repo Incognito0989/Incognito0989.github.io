@@ -1,6 +1,14 @@
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
 
+var envelope = document.getElementById('envelope')
+var envelopeTop = document.getElementById('envelopeTop')
+var letter = document.getElementById('contact')
+var left = document.getElementById('left')
+var bottomRight = document.getElementById('bottome-right')
+var flag = 1;
+
+
 canvas.width = window.innerWidth
 canvas.height = window.innerHeight
 
@@ -94,8 +102,6 @@ class Player {
     }
 
     draw() {
-        console.log(this.topped + " : " + this.position.x + " : " + this.position.y)
-        console.log(canvas.width * .7 + " : " + canvas.height * .111)
         if(this.velocity.y < 0 || this.velocity.y > 0)
             c.drawImage(this.up[Math.floor(this.frames) % 10], this.position.x, this.position.y, this.width, this.height)
         else if(this.velocity.y == 0 && (this.velocity.x > 0 || scrollOffset > 0))
@@ -121,6 +127,11 @@ class Player {
             this.position.x <= canvas.width * .73
             )
             this.topped = true
+
+        if(this.topped) {
+            envelope.classList.remove('hidden')
+            envelope.classList.add('fade-in')
+        }
     }
 }
 
@@ -309,13 +320,6 @@ window.addEventListener('keyup', ({keyCode}) => {
             break
     }
 })
-
-var envelope = document.getElementById('envelope')
-var envelopeTop = document.getElementById('envelopeTop')
-var letter = document.getElementById('contact')
-var left = document.getElementById('left')
-var bottomRight = document.getElementById('bottome-right')
-var flag = 1;
 
 'use strict';
 (function() {
