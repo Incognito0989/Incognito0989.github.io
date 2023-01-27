@@ -1,3 +1,147 @@
+html {
+    font-size: 10px;
+}
+
 body {
     margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+canvas {
+    position: absolute;
+}
+
+.cover {
+    position: absolute;
+    text-align: center;
+    height: 0rem;
+    width: 0rem;
+    z-index: 2;
+}
+
+.cover.top {
+    border-left: 20rem solid transparent;
+    border-right: 20rem solid transparent;
+    border-bottom: 15rem solid transparent;
+    border-top: 15rem solid #ff8789;
+    transform-origin: top;
+    z-index: 0;
+}
+
+.cover.bottom.right {
+    border-left: 20rem solid transparent;
+    border-right: 20rem solid #ff393c;
+    border-bottom: 15rem solid #ff393c;
+    border-top: 15rem solid transparent;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    z-index: 2;
+}
+
+.cover.left {
+    border-left: 20rem solid #ff5355;
+    border-right: 20rem solid transparent;
+    border-bottom: 15rem solid transparent;
+    border-top: 15rem solid transparent;
+    border-bottom-left-radius: 1rem;
+}
+
+.envelope {
+    position: relative;
+    width: 40rem;
+    height: 30rem;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+    top: 20rem;
+    background-color: #ff8789;
+}
+
+.letter {
+    background: #dedede;
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    height: 100%;
+    border-radius: 1rem;
+    box-sizing: border-box;
+    padding: 1rem;
+    text-align: center;
+    font-family: 'Kalam', cursive;
+}
+
+.open {
+    transform: rotateX(180deg);
+    transition: transform 0.4s ease;
+    z-index: 1;
+}
+
+.close {
+    transform: rotateX(0deg);
+    transition: transform 0.4s 0.4s ease;
+    z-index: 5;
+}
+
+.in {
+    transform: translateY(0rem);
+    transition: transform 0.4s ease;
+    z-index: 3;
+}
+
+.out-partial {
+    transform: translateY(-10rem);
+    transition: transform 0.4s 0.6s ease;
+    z-index: 3;
+}
+
+.pull {
+    animation-name: pullLetter;
+    animation-timing-function: linear;
+    animation-duration: 1s;
+}
+
+.put {
+    animation-name: putLetter;
+    animation-timing-function: linear;
+    animation-duration: 1s;
+}
+
+.final {
+    z-index: 20;
+    transform: translateY(0rem) scale(2);
+}
+
+@keyframes pullLetter {
+    0% {
+        transform: translateY(-10rem);
+    }
+    35% {
+        transform: translateY(-20rem);
+    }
+    70% {
+        transform: translateY(-30rem);
+    }
+    100% {
+        transform: translateY(-30rem);
+    }
+}
+
+@keyframes putLetter {
+    0% {
+        transform: translateY(-30rem) scale(1);
+    }
+    25% {
+        transform: translateY(-30rem) scale(1.25);
+    }
+    50% {
+        transform: translateY(-20rem) scale(1.5);
+    }
+    75% {
+        transform: translateY(-20rem) scale(1.75);
+    }
+    100% {
+        transform: translateY(0rem) scale(2);
+    }
 }
