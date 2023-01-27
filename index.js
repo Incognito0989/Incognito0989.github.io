@@ -18,6 +18,7 @@ const wall = 'https://lh4.googleusercontent.com/Psgqev3vGD8a1wla_TcNoOsq2Jtpsb4d
 
 class Player {
     constructor() {
+        this.topped = false
         this.width = 150
         this.height = 150
         this.offset = {
@@ -93,7 +94,8 @@ class Player {
     }
 
     draw() {
-        console.log(this.velocity.y + " : " + (this.position.y + this.height))
+        console.log(this.topped + " : " + this.position.x + " : " + this.position.y)
+        console.log(canvas.width * .7 + " : " + canvas.height * .111)
         if(this.velocity.y < 0 || this.velocity.y > 0)
             c.drawImage(this.up[Math.floor(this.frames) % 10], this.position.x, this.position.y, this.width, this.height)
         else if(this.velocity.y == 0 && (this.velocity.x > 0 || scrollOffset > 0))
@@ -112,6 +114,13 @@ class Player {
         if (this.position.y + this.height + this.velocity.y <=  canvas.height)
             this.velocity.y += gravity
         else this.velocity.y = 0
+
+        if(
+            this.position.y + this.height <= canvas.height * .111 &&
+            this.position.x + this.width >= canvas.width * .7 &&
+            this.position.x <= canvas.width * .73
+            )
+            this.topped = true
     }
 }
 
