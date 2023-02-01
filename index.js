@@ -7,14 +7,14 @@ var letter = document.getElementById('contact')
 var left = document.getElementById('left')
 var bottomRight = document.getElementById('bottom-right')
 var flag = 1;
-
+var speechBubble = document.getElementById('speechBubble')
 
 canvas.width = window.innerWidth
 canvas.height = window.innerHeight
 
 const gravity = 0.0002 * canvas.height
 const bound = {
-    bot: canvas.height * .8,
+    bot: canvas.height * .238,
     top: canvas.height * .2,
     upper: canvas.width,
     lower: 0
@@ -26,6 +26,7 @@ const wall = 'https://lh4.googleusercontent.com/Psgqev3vGD8a1wla_TcNoOsq2Jtpsb4d
 
 class Player {
     constructor() {
+        this.fell = false
         this.started = false
         this.speaking = true
         this.right = true
@@ -155,11 +156,18 @@ class Player {
             createImage('https://lh4.googleusercontent.com/KjXCGNgkXIvj2NjH-dwV4I7PeGvk7ychv9pE8zghrSEeEzB6-xvl2q47sjFs2Z0CbOg=w2400'),
         ]
 
+        this.dialogsNumber = 0
+        this.dialogs = [
+            'UGH!<br>I know Andrew Would<br>have flashed this!',
+            "Man!<br>I'm literally trolling!",
+            "Bruh waht am I doing",
+            "No No Ya no"
+        ]
+
         this.frames = 0
     }
 
     speechBubble() {
-        var speechBubble = document.getElementById('speechBubble')
         speechBubble.style.left = this.position.x + this.width / 1.25
         speechBubble.style.top = this.position.y - this.height / 1.25
 
@@ -198,10 +206,27 @@ class Player {
     }
 
     update() {
+        console.log(this.velocity.y)
         this.frames += .12
         this.draw()
         this.position.x += this.velocity.x
         this.position.y += this.velocity.y
+            
+        if(this.velocity.y <= 0) {
+            this.fell = false
+        }
+
+        if(this.velocity.y >= 10 && this.position.y + this.height >= bound.bot) {
+            if(!this.fell) {
+                this.fall = 0
+                this.started = false
+                this.speaking = false
+                speechBubble.style.visibility = 'visible'
+                speechBubble.innerHTML = this.dialogs[this.dialogsNumber % this.dialogs.length]
+                this.dialogsNumber++
+            }
+            this.fell = true
+        }
 
         if (this.position.y + this.height + this.velocity.y <=  canvas.height)
             this.velocity.y += gravity
