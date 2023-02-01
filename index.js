@@ -161,13 +161,16 @@ class Player {
             'UGH!<br>I know Andrew Would<br>have flashed this!',
             "Man!<br>I'm literally trolling!",
             "Bruh waht am I doing",
-            "No No Ya no"
+            "No No Ya no",
+            "What da dog doin"
         ]
         this.help = false
         this.helpDialogNum = 0
         this.helpDialog = [
-            "Hm. I may need to be more static",
-            "I don't think i can dyno that"
+            "Hm. I may need to climb more static",
+            "I don't think I can dyno that",
+            "I don't have the<br>strength for that!",
+            "Anyone have a static beta?"
         ]
 
         this.frames = 0
