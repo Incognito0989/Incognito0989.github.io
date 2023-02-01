@@ -26,6 +26,7 @@ const wall = 'https://lh4.googleusercontent.com/Psgqev3vGD8a1wla_TcNoOsq2Jtpsb4d
 
 class Player {
     constructor() {
+        this.right = true
         this.topped = false
         this.width = 150
         this.height = 150
@@ -34,7 +35,7 @@ class Player {
             left: .4
         }
         this.jump = .007 * canvas.height
-        this.speed = 3
+        this.speed = 3w
         this.position = {
             x: 100,
             y: canvas.height * .8 - this.height
@@ -62,7 +63,25 @@ class Player {
             createImage('https://lh5.googleusercontent.com/ilOWp-xxHOf0Z4I8lJeuOAhD42v1NB3R-vXjv7OwFWnLrC-45H09aii6NEGl4w7v5fA=w2400')
         ]
 
-        this.up = [
+        this.idleLeft = [
+            createImage('https://lh6.googleusercontent.com/gHrAwQttno8h5TeH3BHgvs6WgCEcBnzOmhYuu1AN59RlDm2OOz8gDbJLJGoYq17TU18=w2400'),
+            createImage('https://lh3.googleusercontent.com/ML8UkEK1Ddq5ohsjXrAxGQ-HtsNqVysuYYxorPVYb4sOGJLa35abxDQTTE19hr42APY=w2400'),
+            createImage('https://lh6.googleusercontent.com/tRnsg8hwJ8PlsItOLvthL-_3xW1Iz2S2ffFBpQBw26rasfD77iszC2YyGrYg5tg8gOQ=w2400'),
+            createImage('https://lh4.googleusercontent.com/EpMrLsTE5rjWgGyZBcHfdppmoJPmB720p9IjwKgqkX57DLsbNrHWH592-qlE5oifKEY=w2400'),
+            createImage('https://lh4.googleusercontent.com/IDWHxRCqu-Eg737ej9em_pDqXL8k1uHy8tm7Yo2G1vhwIoMCP6jJ2CJU9McaGEaZr_U=w2400'),
+            createImage('https://lh3.googleusercontent.com/8GIXDgsa69WH8iu65ratTbyTEZvVT2ZyqEDrd1KCkkWFmAXf1fz9b7a9bvnIzxgh4Ec=w2400'),
+            createImage('https://lh3.googleusercontent.com/w5z69QIlgWb_0UJshGmWWZuAOysxyT4xXiKHLKNzCGg-IyjwogC_yjf_YYVA5U-C2gs=w2400'),
+            createImage('https://lh5.googleusercontent.com/HZAqg2lqhBTinZaD_D0hnwPPNc-CPtF3aX4q2i9D73xOQm0wl1D-jSCjq27hPBoIW9I=w2400'),
+            createImage('https://lh6.googleusercontent.com/cc-0UN5toSED9VraOLK3hGV26JGIzz9BzSgxkTt57_NooRWems6Z-U6gUiyPN1dOJTc=w2400'),
+            createImage('https://lh3.googleusercontent.com/KSQVzIOtL1ch4NiEaU9pGaOqYR0hqDDU_nA1-qjQLFdvN7tflj9DVeOZujiZbnlmjzc=w2400'),
+            createImage('https://lh3.googleusercontent.com/0YCV5LAnWhyuD0RXdjJ02UIAKgwmdrRM0yTgwsFlZBztt3FuJYY5QIP0m8RbhvnWr4Y=w2400'),
+            createImage('https://lh6.googleusercontent.com/SVp_pvkwPECJuZCGq3Omcbhao0WnmyHW6-oeV3sxXv7h2849Gpcz4DsI7n0RI_Jz26Q=w2400'),
+            createImage('https://lh4.googleusercontent.com/0W-gP5qM7rjtizgHB2zubCZVL_6l07eYyOayCkM7SxLNX5hY4JCsfIMBcWJj6ethiQ0=w2400'),
+            createImage('https://lh3.googleusercontent.com/Yv_YWkLTstNxsZczdaIfLIaHOOp_ihPSNtIkTPgBsIMLgzIUQfWZ3PTEGfzk441GES0=w2400'),
+            createImage('https://lh3.googleusercontent.com/y9EPHci0u0cWq4EPq0NFYbBrAg26kqBvO9YfdP6pD2vWccjQDZh9YB_BMJYBrJ_bTPQ=w2400'),
+        ]
+
+        this.upRight = [
             createImage('https://lh4.googleusercontent.com/ywYXnumHdZkChuCJh1g3H564UMZzlg19jyBE8N0TutrG2BoSPi9XTTYFOmV2POdkrFM=w2400'),
             createImage('https://lh4.googleusercontent.com/JVIIcBnr0IExdyoR15mz_S7BijaVwyVrUSzqD2VRQ4lMs7-6vJyd2-H0MeNx6OrOqMU=w2400'),
             createImage('https://lh3.googleusercontent.com/3WrSlHGXALLbkF1qHKymioyD_YnEP9ZAeLwnXWVcdAa38J-1Js9Hq2Z9rA0r2XyHEGg=w2400'),
@@ -73,6 +92,19 @@ class Player {
             createImage('https://lh4.googleusercontent.com/QqMsuU-0K7vDPmPj_eAftAKRC9Bd-NI7yjR_vgTp3hsKwVDTlGS4VP_OCQnn1MuFv4E=w2400'),
             createImage('https://lh4.googleusercontent.com/R_AHScYvB-YZF7oAUu0NaYhxFEgFy0QRiHQR6iZGVqocQ9ErwJjDzdE-sN5-wPtJMHU=w2400'),
             createImage('https://lh4.googleusercontent.com/WtjqDe8m4qKh9i-1tSQt2Vm9fvqcXY_KVx-xUBVjCYhqGQx58uU9di3uE2JFG6Kclbk=w2400')
+        ]
+
+        this.upLeft = [
+            createImage('https://lh5.googleusercontent.com/gjdgZl7IH92PxYGynM9u82_dHKUq1tMv7_eOGdRu8QajGPXo4fmgFSXZ0NEl37nFwz8=w2400'),
+            createImage('https://lh5.googleusercontent.com/63KxNCfJk4Vkmk-vRfNHs6YMJo-ZRbgZvNGOW95FPByP866bAsuRj2P3F5YTw-ASZ7A=w2400'),
+            createImage('https://lh6.googleusercontent.com/Pfk9d7u6-hRCbx01hb4tHx-6hWb0DDeGtVD1dFagE9F3fQZ7_63z08pDwsMUlAExwKc=w2400'),
+            createImage('https://lh6.googleusercontent.com/WJxPPeqf6Ue5TavdIcZ0zNBmBTQl_2FN4vVObyvvJFecQP-MGdriIQf3ZcvCPC3kvf0=w2400'),
+            createImage('https://lh5.googleusercontent.com/0kCgCL_MAGGraYtqo1CxRlLQ8IQ0fgzGXKgpyq7c00LtB8UGA6mV8dmOCLUzT9joyvc=w2400'),
+            createImage('https://lh3.googleusercontent.com/5BugAQcSUC1hatdqI6SYc3jrq4b3MI8MUkDaRLa9FDiB0RP3GGfy885NesLK7ZjH4vk=w2400'),
+            createImage('https://lh4.googleusercontent.com/JtWQmkpvodjNdgCb_w5RDSVXPctNdyAmhjlhCmFNPMbvTrSf4fZazAEKh2Dl3sBDvN8=w2400'),
+            createImage('https://lh4.googleusercontent.com/R6S1OuuCtf1IRUBG3P-jQRw65b_G9w_mTknUMG-2_FVdLqv3thj2wXv9KGZBD38kLqk=w2400'),
+            createImage('https://lh6.googleusercontent.com/T89eS04vRmJxGwLKoP11GHZmmxY9Y3udX-NxHcpGgZBVNRguEcgG7GLAYy-nvMUmCr8=w2400'),
+            createImage('https://lh5.googleusercontent.com/Hoyzw0AXuHv8cw32NdpthRkxfU3qgdJec_ycgRN36CpurSlsCzTKWNO6RcRNnwFkq2o=w2400'),
         ]
 
         this.walkRight = [
@@ -98,17 +130,48 @@ class Player {
             createImage('https://lh6.googleusercontent.com/p6Xu7hHWXvIVh8I7p3FFNXLmNMe_FNbTRvOrW1UCXx9nlnUEr0my9lrbf1cufevTG1A=w2400'),
         ]
 
+        this.walkLeft = [
+            createImage('https://lh4.googleusercontent.com/Xy6egrBRsCBkF-JSFyP60Rxa8Y1YWOL1Z02WZswuwmP5E0G3SBSJ0mijqp009au51zU=w2400'),
+            createImage('https://lh3.googleusercontent.com/gdjjTVj2E9qFtNo3EcGVRYxGdF1UYgQtbZ-x_hhkVEP0bJTODi4sGfdWOn4J3xlldsg=w2400'),
+            createImage('https://lh4.googleusercontent.com/uZjqxdl7kOUonEXrDGnEUUY7Y_1LcwkX83eWgKHyc6cCT-mCvt8a3r3luQ7LZTlPbEA=w2400'),
+            createImage('https://lh5.googleusercontent.com/wPB_acjKF34miS2HlTEaDFi2rFuuPK17xxGFxAzoRxkF-DgvduLvXZAozovJ-PihIYA=w2400'),
+            createImage('https://lh3.googleusercontent.com/zxO7D3j8Th2xVJ0gWTJVoORaOFHWlXDDfQeKwrwrUnuLqVkunWMvGAURN5z4X2OCvdg=w2400'),
+            createImage('https://lh6.googleusercontent.com/zsgIlbK2XIkf5wXHDUnNSGrNu8gwK1ENHomm19EKHrBBjtgchkHEQQpSZ0qabqBWgIU=w2400'),
+            createImage('https://lh3.googleusercontent.com/7t3nf0paL5htnhbCkcgDhWW7TR_Qk-hTZbAxub9Cd8NSaoArweCcfRJ_BmMcQSpQkac=w2400'),
+            createImage('https://lh6.googleusercontent.com/GHM3g98PgaHlk9tDt7P4eG8xPFhsKZxstiKij5MFA2Dpx1LETJBWIJ8QWU_hDAHncTg=w2400'),
+            createImage('https://lh4.googleusercontent.com/yOij_D9wFKjTfwpOX8Dqt-Mhf16uX2Y02jlK945jqEqcPAg6Mix79nKy5DSWaL5YnrE=w2400'),
+            createImage('https://lh6.googleusercontent.com/x0AtzkZ3UzWLFCqazZkWRb_g7GWaMWnJ0lO-B7h7P3m-Shr4N2radw3lCu_uIwbPjAk=w2400'),
+            createImage('https://lh4.googleusercontent.com/aGWWt1Phs4rgoziCb1plNnTnjbRN44h84IMBNx_14ss-nlUFoDuw1ajbcrTuVle86hU=w2400'),
+            createImage('https://lh4.googleusercontent.com/miSd03CCyIENkSiJa5p8p2oCQ_08fBTBejApCJsWukijCtDVHlSLEx6irbDXZCZJsNw=w2400'),
+            createImage('https://lh6.googleusercontent.com/lq-RS2MCXH4cbaUPgblw7AIMOs16WKbbCfQdlc_DDW9bxxaXg7Rbnz7AZKSvaVC212s=w2400'),
+            createImage('https://lh6.googleusercontent.com/3XoQvE4QpoDG7gObLrzIyQ5fYbi0hWLCFHmn1jppDfI9ymtkEqvoeT3ftoNMWNLdeh8=w2400'),
+            createImage('https://lh5.googleusercontent.com/PFEFeYO3ff3uApi921B2AQKp45Q42iDRwsBK9F3lEEieC8_odtXRczRryVO97c722hE=w2400'),
+            createImage('https://lh4.googleusercontent.com/5Mwn-BNa0Ic83yQbgmYePz5tfbDvpI9VqGh-N4Jx2CJ8zG1iATg4RP64qWhcICrgPsw=w2400'),
+            createImage('https://lh5.googleusercontent.com/zjLP6o91jEhlomfHl_1iGdJ1E3g1wAqxpin8HXv8a8xLieNjxMS80BdNkduUDam1Ic8=w2400'),
+            createImage('https://lh5.googleusercontent.com/_7v2hbBv2OTEo7J0XVu16aWrnUCX4h89aY5VfrXDMC_G5gt7fW5E_eJgGVbULjbNOvg=w2400'),
+            createImage('https://lh3.googleusercontent.com/p_TQ3nzgqn9aYAiZlbNR8UKjTSgVjvB-GYoR3jk-bWQplD5M3CaNztQQkl5PL14gOFM=w2400'),
+            createImage('https://lh4.googleusercontent.com/KjXCGNgkXIvj2NjH-dwV4I7PeGvk7ychv9pE8zghrSEeEzB6-xvl2q47sjFs2Z0CbOg=w2400'),
+        ]
+
         this.frames = 0
     }
 
     draw() {
-        if(this.velocity.y < 0 || this.velocity.y > 0)
-            c.drawImage(this.up[Math.floor(this.frames) % 10], this.position.x, this.position.y, this.width, this.height)
-        else if(this.velocity.y == 0 && (this.velocity.x > 0 || scrollOffset > 0))
-            c.drawImage(this.walkRight[Math.floor(this.frames) % 20], this.position.x, this.position.y, this.width, this.height)
-        else if((this.velocity.x == 0 || scrollOffset == 0) && this.velocity.y == 0)
-            c.drawImage(this.idleRight[Math.floor(this.frames) % 15], this.position.x, this.position.y, this.width, this.height)
-
+        if(this.right) {
+            if(this.velocity.y < 0 || this.velocity.y > 0)
+                c.drawImage(this.upRight[Math.floor(this.frames) % this.upRight.length], this.position.x, this.position.y, this.width, this.height)
+            else if(this.velocity.y == 0 && (this.velocity.x > 0 || scrollOffset > 0))
+                c.drawImage(this.walkRight[Math.floor(this.frames) % this.walkRight.length], this.position.x, this.position.y, this.width, this.height)
+            else if((this.velocity.x == 0 || scrollOffset == 0) && this.velocity.y == 0)
+                c.drawImage(this.idleRight[Math.floor(this.frames) % this.idleRight.length], this.position.x, this.position.y, this.width, this.height)
+        } else {
+            if(this.velocity.y < 0 || this.velocity.y > 0)
+                c.drawImage(this.upLeft[Math.floor(this.frames) % this.upLeft.length], this.position.x, this.position.y, this.width, this.height)
+            else if(this.velocity.y == 0 && (this.velocity.x < 0 || scrollOffset > 0))
+                c.drawImage(this.walkLeft[Math.floor(this.frames) % this.walkLeft.length], this.position.x, this.position.y, this.width, this.height)
+            else if((this.velocity.x == 0 || scrollOffset == 0) && this.velocity.y == 0)
+                c.drawImage(this.idleLeft[Math.floor(this.frames) % this.idleLeft.length], this.position.x, this.position.y, this.width, this.height)
+        }
     }
 
     update() {
@@ -132,6 +195,11 @@ class Player {
             envelope.classList.remove('hidden')
             envelope.classList.add('fade-in')
         }
+
+        if(this.velocity.x > 0)
+            this.right = true
+        if(this.velocity.x < 0)
+            this.right = false
     }
 }
 
