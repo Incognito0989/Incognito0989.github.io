@@ -31,14 +31,14 @@ class Player {
         this.speaking = true
         this.right = true
         this.topped = false
-        this.width = .078 * canvas.width
-        this.height = .16 * canvas.height
+        this.width = 150 * canvas.width / canvas.height / 2
+        this.height = 150 * canvas.width / canvas.height / 2
         this.offset = {
             right: .7,
             left: .4
         }
         this.jump = .007 * canvas.height
-        this.speed = 3
+        this.speed = 1.5 * canvas.width / canvas.height
         this.position = {
             x: 100,
             y: canvas.height * .8 - this.height
