@@ -35,7 +35,7 @@ class Player {
             left: .4
         }
         this.jump = .007 * canvas.height
-        this.speed = 3w
+        this.speed = 3
         this.position = {
             x: 100,
             y: canvas.height * .8 - this.height
