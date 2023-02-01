@@ -225,9 +225,8 @@ class Player {
             this.fell = false
         }
 
-        if(((this.position.y + this.height) >= bound.bot) && this.velocity.y >= 7) {
+        if(((this.position.y + this.height) >= bound.bot) && this.velocity.y >= 7 && !this.topped) {
             if(!this.fell) {
-                this.fall = 0
                 this.started = false
                 this.speaking = false
                 speechBubble.style.visibility = 'visible'
