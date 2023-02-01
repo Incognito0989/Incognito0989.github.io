@@ -157,11 +157,17 @@ class Player {
         ]
 
         this.dialogsNumber = 0
-        this.dialogs = [
+        this.meanDialog = [
             'UGH!<br>I know Andrew Would<br>have flashed this!',
             "Man!<br>I'm literally trolling!",
             "Bruh waht am I doing",
             "No No Ya no"
+        ]
+        this.help = false
+        this.helpDialogNum = 0
+        this.helpDialog = [
+            "Hm. I may need to be more static",
+            "I don't think i can dyno that"
         ]
 
         this.frames = 0
@@ -222,8 +228,14 @@ class Player {
                 this.started = false
                 this.speaking = false
                 speechBubble.style.visibility = 'visible'
-                speechBubble.innerHTML = this.dialogs[this.dialogsNumber % this.dialogs.length]
-                this.dialogsNumber++
+                if(this.help) {
+                    speechBubble.innerHTML = this.helpDialog[this.helpDialogNum % this.helpDialog.length]
+                    this.helpDialogNum++
+                    this.help = false
+                } else {
+                    speechBubble.innerHTML = this.meanDialog[this.dialogsNumber % this.meanDialog.length]
+                    this.dialogsNumber++
+                }
             }
             this.fell = true
         }
@@ -299,7 +311,17 @@ class Rectangle extends Platform {
     }
     
     collision(player) {
-        return player.position.y + player.height <= this.position.y + this.offset.y &&
+        if(player.position.y + player.height <= bound.bot && player.velocity.y >= 7) {
+            if(player.position.y + player.height <= this.position.y + this.offset.y &&
+                player.position.y + player.height + player.velocity.y >= this.position.y + this.offset.y &&
+                player.position.x + player.width * player.offset.right >= this.position.x + this.offset.x &&
+                player.position.x + player.width * player.offset.left <= this.position.x + this.width - this.offset.x) {
+                player.help = true
+            }
+            return false
+        }
+        else
+            return player.position.y + player.height <= this.position.y + this.offset.y &&
             player.position.y + player.height + player.velocity.y >= this.position.y + this.offset.y &&
             player.position.x + player.width * player.offset.right >= this.position.x + this.offset.x &&
             player.position.x + player.width * player.offset.left <= this.position.x + this.width - this.offset.x
