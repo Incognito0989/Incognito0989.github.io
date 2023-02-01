@@ -173,6 +173,7 @@ body {
     margin-right: auto;
     top: 20rem;
     background-color: #ff8789;
+    z-index: 20;
 }
 
 .letter {
