@@ -13,8 +13,17 @@ body {
     place-items: center;
     font: 2vw system-ui;
   }
+
+  .speech-wrapper {
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+  }
   
   .speech {
+    width: fit-content;
+    position: absolute;
     transform: translatey(0px);
     -webkit-animation: float 5s ease-in-out infinite;
             animation: float 5s ease-in-out infinite;
@@ -153,7 +162,7 @@ body {
 }
 
 .envelope {
-    position: relative;
+    position: absolute;
     width: 40rem;
     height: 30rem;
     border-bottom-left-radius: 1rem;
@@ -174,6 +183,7 @@ body {
     box-sizing: border-box;
     padding: 1rem;
     text-align: center;
+    font-size: small;
     font-family: 'Kalam', cursive;
 }
 

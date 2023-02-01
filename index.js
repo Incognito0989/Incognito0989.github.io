@@ -5,7 +5,7 @@ var envelope = document.getElementById('envelope')
 var envelopeTop = document.getElementById('envelopeTop')
 var letter = document.getElementById('contact')
 var left = document.getElementById('left')
-var bottomRight = document.getElementById('bottome-right')
+var bottomRight = document.getElementById('bottom-right')
 var flag = 1;
 
 
@@ -26,6 +26,8 @@ const wall = 'https://lh4.googleusercontent.com/Psgqev3vGD8a1wla_TcNoOsq2Jtpsb4d
 
 class Player {
     constructor() {
+        this.started = false
+        this.speaking = true
         this.right = true
         this.topped = false
         this.width = 150
@@ -156,6 +158,27 @@ class Player {
         this.frames = 0
     }
 
+    speechBubble() {
+        var speechBubble = document.getElementById('speechBubble')
+        speechBubble.style.left = this.position.x + this.width / 1.25
+        speechBubble.style.top = this.position.y - this.height / 1.25
+
+        if(
+            this.position.y + this.height <= canvas.height * .775 &&
+            this.position.x + this.width - this.offset.right >= canvas.width * .238 &&
+            this.position.x - this.offset.left <= canvas.width * .24
+            )
+            this.started = true
+
+        if(!this.started && this.speaking) {
+            speechBubble.style.visibility = 'visible'
+            speechBubble.innerHTML = 'this seems like<br>an easy climb!'
+        } else if(this.started && !this.topped) {
+            this.speaking = false
+            speechBubble.style.visibility = 'hidden'
+        }
+    }
+
     draw() {
         if(this.right) {
             if(this.velocity.y < 0 || this.velocity.y > 0)
@@ -188,8 +211,11 @@ class Player {
             this.position.y + this.height <= canvas.height * .111 &&
             this.position.x + this.width >= canvas.width * .7 &&
             this.position.x <= canvas.width * .73
-            )
+            ) {
             this.topped = true
+            speechBubble.style.visibility = 'visible'
+            speechBubble.innerHTML = 'Whats this?!<br>I should def touch it<br>with my mouse'
+        }
 
         if(this.topped) {
             envelope.classList.remove('hidden')
@@ -345,6 +371,7 @@ function animate() {
         }
     })
     player.update()
+    player.speechBubble()
 }
 
 animate()
@@ -398,6 +425,7 @@ window.addEventListener('keyup', ({keyCode}) => {
 })();
 
 function openEnvelopeOnHover() {
+    speechBubble.style.visibility = 'hidden'
     envelopeTop.classList.remove('close')
     envelopeTop.classList.add('open')
     pullOutPartial()
@@ -412,6 +440,7 @@ function closeEnvelopeOnHover() {
     }
 }
 function pullOutPartial() {
+    this.topped = false
     letter.classList.remove('in')
     letter.classList.add('out-partial')
 }
@@ -421,10 +450,11 @@ function putIn() {
 }
 function openEnvelope() {
     flag = 0;
-    closeEnvelopeHover();
+    envelope.removeEventListener('mouseover', openEnvelopeOnHover)
+    envelope.removeEventListener('mouseout', closeEnvelopeOnHover)
     letter.classList.add('pull')
     letter.addEventListener('animationend', function() {
-        left.style.zIndex = 0
+        left.style.zIndex = '0'
         bottomRight.style.zIndex = 0
         envelopeTop.style.zIndex = 0
         letter.style.zIndex = 20
