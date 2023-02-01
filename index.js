@@ -14,7 +14,7 @@ canvas.height = window.innerHeight
 
 const gravity = 0.0002 * canvas.height
 const bound = {
-    bot: canvas.height * .238,
+    bot: canvas.height * .775,
     top: canvas.height * .2,
     upper: canvas.width,
     lower: 0
@@ -206,7 +206,7 @@ class Player {
     }
 
     update() {
-        console.log(this.velocity.y)
+        
         this.frames += .12
         this.draw()
         this.position.x += this.velocity.x
@@ -216,7 +216,7 @@ class Player {
             this.fell = false
         }
 
-        if(this.velocity.y >= 10 && this.position.y + this.height >= bound.bot) {
+        if(((this.position.y + this.height) >= bound.bot) && this.velocity.y >= 7) {
             if(!this.fell) {
                 this.fall = 0
                 this.started = false
