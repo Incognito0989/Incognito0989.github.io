@@ -174,17 +174,20 @@ body {
 }
 
 .letter {
-    background: #dedede;
-    width: 95%;
-    margin-left: auto;
-    margin-right: auto;
-    height: 100%;
-    border-radius: 1rem;
-    box-sizing: border-box;
-    padding: 1rem;
-    text-align: center;
-    font-size: small;
-    font-family: 'Kalam', cursive;
+  display: flex;
+  gap: 20%;
+  flex-direction: column;
+  background: #dedede;
+  width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+  height: 100%;
+  border-radius: 1rem;
+  box-sizing: border-box;
+  padding: 1rem;
+  text-align: center;
+  font-size: small;
+  font-family: 'Kalam', cursive;
 }
 
 .open {
@@ -268,4 +271,82 @@ body {
     100% {
         transform: translateY(0rem) scale(2);
     }
+}
+
+.heart {
+  position: relative;
+  background-color: #d04e4e;
+  height: 60px;
+  width:60px;
+  transform: rotate(-45deg);
+  animation: .8s beat infinite;
+}
+  
+.heart:before, .heart:after {
+  content:"";
+  background-color: #d04e4e;
+  border-radius:50%;
+  height: 60px;
+  width: 60px;
+  position: absolute;
+  }
+  
+.heart:before {
+  top:-30px;
+  left:0;
+}
+  
+.heart:after {
+  left:30px;
+  top:0;
+}
+
+.heart-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.smile {
+  position: absolute;
+  width:30px;
+  height:15px;
+  background-color: #333;
+  z-index:1;
+  border-radius: 0 0 100px 100px;
+  top:30px;
+  overflow: hidden;
+}
+
+.smile:before {
+  content:"";
+  position: absolute;
+  border-radius:50%;
+  width:20px;
+  height:20px;
+  right: 4px;
+  background-color: #030202;
+}
+
+.eyes {
+  position: absolute;
+  border-radius: 50%;
+  background-color: #333;
+  width:10px;
+  height:10px;
+  z-index:1;
+  top: 10px;
+  left: 195px;
+  box-shadow: -40px 0 #333;
+  transform-origin: 50%;
+  animation: close 2s infinite;
+}
+
+@keyframes beat {
+  0%, 40%, 100% {
+    transform: scale(1) rotate(-45deg);
+  }
+  25%, 60% {
+    transform: scale(1.1) rotate(-45deg);
+  }
 }
