@@ -31,8 +31,8 @@ class Player {
         this.speaking = true
         this.right = true
         this.topped = false
-        this.width = 150 * canvas.width / canvas.height / 2
-        this.height = 150 * canvas.width / canvas.height / 2
+        this.width = 150
+        this.height = 150
         this.offset = {
             right: .7,
             left: .4
