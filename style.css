@@ -23,6 +23,13 @@ body {
     z-index: 10;
   }
   
+  .sign {
+    text-align: left;
+    position: absolute;
+    right: 15px;
+    top: 5px;
+  }
+
   .speech {
     width: fit-content;
     position: absolute;
@@ -180,7 +187,7 @@ body {
   display: flex;
   gap: 20%;
   flex-direction: column;
-  background: #dedede;
+  background: #ffdfdf;
   width: 95%;
   margin-left: auto;
   margin-right: auto;
