@@ -162,7 +162,11 @@ class Player {
             "Man!<br>I'm literally trolling!",
             "Bruh waht am I doing",
             "No No Ya no",
-            "What da dog doin"
+            "This is so hard!",
+            "I wish trevor were<br>here to help me!",
+            "I need to grow a few inches",
+            "I'm just tired from<br>looking at the wall",
+            "Maybe more chalk?"
         ]
         this.help = false
         this.helpDialogNum = 0
@@ -170,7 +174,8 @@ class Player {
             "Hm. I may need to climb more static",
             "I don't think I can dyno that",
             "I don't have the<br>strength for that!",
-            "Anyone have a static beta?"
+            "Anyone have a static beta?",
+            "Just go up maybe?"
         ]
 
         this.frames = 0
